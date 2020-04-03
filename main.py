@@ -133,12 +133,12 @@ while episode < episodes:
     while step < max_iter:
         step += 1
         env.render()
-        action = get_action(state, 0)
+        action = get_action(state, epsilon)
         next_state, reward, done, _ = env.step(action)
         
         episode_rewards += reward
         
-        if done or i == max_iter:
+        if done or step == max_iter:
             # update target model weights
             W = np.array(model.get_weights())
             W_ = np.array(target_model.get_weights())
@@ -153,7 +153,8 @@ while episode < episodes:
         # s(t+1) is now the current state
         state = next_state
         
-        #loss = train_model()
+        # train the model
+        loss = train_model()
             
     total_rewards.append(rewards)
     episode += 1
