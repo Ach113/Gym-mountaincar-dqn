@@ -51,7 +51,7 @@ def dqn(input_shape):
     Out = Dense(env.action_space.n)(x)
     
     model = Model(In, Out)
-    model.compile(loss=huber, optimizer=RMSprop(learning_rate=alpha))
+    model.compile(loss='mse', optimizer=RMSprop(learning_rate=alpha))
     
     return model
 
